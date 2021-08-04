@@ -1,0 +1,7 @@
+{
+  "name": "lapTimer",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
