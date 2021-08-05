@@ -1,25 +1,27 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import ExploreContainer from '../components/ExploreContainer';
+import { 
+    IonContent,
+    IonHeader,
+    IonPage,
+    IonTitle,
+    IonToolbar,
+} from '@ionic/react';
+
 import './Home.css';
+import Timer from '../components/Timer';
 
 const Home: React.FC = () => {
-  return (
-    <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Lap Timer</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Lap Timer (2nd title)</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <ExploreContainer />
-      </IonContent>
-    </IonPage>
-  );
+    return (
+        <IonPage>
+            <IonHeader>
+                <IonToolbar>
+                    <IonTitle>Lap Timer!</IonTitle>
+                </IonToolbar>
+            </IonHeader>
+            <IonContent fullscreen>
+                <Timer/>
+            </IonContent>
+        </IonPage>
+    );
 };
 
 export default Home;

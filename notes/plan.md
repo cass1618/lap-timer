@@ -7,5 +7,5 @@ Your app should have these basic functions:
 
 ### TIMER
 1. Need some sort of time import
-1. 3 buttons: Start, stop, reset
+1. 2 buttons: Start/stop, reset
 1. 
