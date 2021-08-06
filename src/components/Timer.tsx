@@ -1,45 +1,64 @@
 import './Timer.css';
 import { IonFab, IonFabButton } from '@ionic/react';
 import { useEffect, useCallback, useState } from 'react';
-import { msToClockString } from '../utility/printTime';
-
+import msToClockString from '../utility/printTime';
 
 const Timer: React.FC = () => {
-
-    const [msElapsed, setMs] = useState(0);
+    const [timeElapsed, setTimeElapsed] = useState(0);
     const [isRunning, setIsRunning] = useState(false);
+    const [lapTimes, setLapTimes] = useState([0,0,0,0]);
+    const [lapNumber, setLapNumber] = useState(0);
 
-    //Need a function that will add 10 ms to the time elapsed every 10 ms
-    const tick = useCallback(() => setMs(msElapsed + 10), [msElapsed])
+    // Need a function that will add 10 ms to the time elapsed every 10 ms
+    const tick = useCallback(() => setTimeElapsed(timeElapsed + 10), [timeElapsed]);
 
-    //This function will run every 10 milliseconds
+    // This function will run every 10 milliseconds
     useEffect(() => {
-
         const timerId = isRunning
-            ? setInterval(tick, 10)
+            ? (console.log(timeElapsed)
+            setInterval(tick, 10))
             : undefined
 
-        return () => timerId 
+        return () => timerId
             ? clearInterval(timerId)
             : undefined
-    }, 
-    //If this changes useEffect will run or stop running
+    },
+    // If this changes useEffect will run or stop running
     [isRunning])
+
+    const onClickingLap = () => {
+        let newLapTimes = lapTimes;
+        newLapTimes[lapNumber] = timeElapsed;
+        setLapTimes(newLapTimes);
+        console.log(lapTimes)
+    }
+    
+    // const onClickingReset = () => {
+    //     setTime(0);
+    //     setLaps([]);
+    //     setTimerOn(false);
+    // }
+
 
     return (
         <div>
             <IonFab vertical="center" horizontal="center" slot="fixed">
-                <h1>{msToClockString(msElapsed)}</h1>
+                <h1>{msToClockString(timeElapsed)}</h1>
                 <IonFabButton onClick={() => setIsRunning(true)}>
                     START
                 </IonFabButton>
-                <IonFabButton  onClick={() => setIsRunning(false)}>
+                <IonFabButton onClick={() => setIsRunning(false)}>
                     STOP
+                </IonFabButton>
+                <IonFabButton onClick={() => onClickingLap}>
+                    LAP
+                </IonFabButton>
+                <IonFabButton onClick={() => setTimeElapsed(0)}>
+                    RESET
                 </IonFabButton>
             </IonFab>
         </div>
-    );
-};
-
+    )
+}
 
 export default Timer;
